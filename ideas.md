@@ -84,3 +84,11 @@ The mark is a cobalt orbital ring interrupted by a small graphite node, implying
 ## Style Decisions
 
 Signal Cobalt remains an **instrument accent** for orbital markers, active navigation, key numerals, and rare headline emphasis; it will not be used as a broad decorative field. Cobalt italics remain a deliberately scarce precision gesture—one phrase at most within each major visual field. The portfolio’s signature structure is a vertical micro-navigation/index system, using orbital focus markers and side metadata to carry the narrative from section to section.
+
+Display headlines prioritize **calm engineered readability**: optical tightness is used for confidence but never to crush or distort the letterforms. The orbital index is a primary navigation device and persists as a visible narrative control across desktop scenes. Dark navy appears only in evidence chambers, always balanced by hairline silver rules, translucent technical surfaces, and restrained cobalt instrumentation.
+
+## Motion Upgrade — Locked-Page Narrative
+
+Desktop becomes a sequence of deliberate full-height **narrative frames**. Scroll snap makes each chapter settle precisely into place without trapping the visitor, while scroll progress, the orbital index, and a tiny “scene” label communicate where the visitor is in the story. Mobile keeps natural scrolling because reliable reading and touch navigation take precedence over theatrical control.
+
+The motion language uses six composable 21st-inspired primitives: a blur-and-rise word reveal for hero text, a spring-based magnetic primary action, orbit/dock navigation feedback, responsive spotlights on evidence cards, gentle 3D tilt on project surfaces, and scroll-linked depth shifts on visual layers. All non-essential motion falls away under `prefers-reduced-motion`.
