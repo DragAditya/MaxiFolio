@@ -11,3 +11,7 @@ The new visual assets will include a hero collage, three project-specific abstra
 ## Style Decisions
 
 The visual review recommended returning to the earlier quiet-mineral direction. That recommendation is intentionally not adopted because the user explicitly requested a **maximalism-style, Pinterest-inspired** portfolio. The accepted improvement is clearer, practical project copy: colourful collage visuals stay, while labels and descriptions explain the software in direct English.
+
+## Peak Interaction Review Decision
+
+The interaction review again recommended replacing the colourful scrapbook visual language with Quiet Precision. This conflicts with the user’s explicit request for a maximalist Pinterest aesthetic, so the collage palette, paper layering, and playful type remain. The accepted quality rule is that interaction effects and GitHub carousel details must make projects easier to explore, never make the content harder to read.

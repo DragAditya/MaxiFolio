@@ -44,3 +44,18 @@
 - [x] Replace the clean layout with a rich Pinterest-inspired portfolio.
 - [x] Validate desktop/mobile composition, motion, and readability.
 - [ ] Save and deliver the maximalist portfolio checkpoint.
+
+## Reusable Portfolio Skill
+
+- [ ] Define the reusable portfolio workflow from this project.
+- [ ] Create and author the new skill package.
+- [ ] Validate the skill package.
+- [ ] Deliver the installable skill file.
+
+## Peak Interaction Upgrade
+
+- [x] Inspect the linked 21st.dev examples and GitHub profile.
+- [x] Select interaction patterns that support the maximalist portfolio style.
+- [x] Add animated hero, cursor, hover, parallax, carousel, and GitHub project sections.
+- [x] Validate performance, accessibility, and responsive behavior.
+- [ ] Save and deliver the upgraded portfolio checkpoint.
