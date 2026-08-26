@@ -1,5 +1,11 @@
 # Portfolio Upgrade Checklist
 
+## Awards Showcase Redesign
+
+- [x] Replace the repetitive award cards with distinct recognition artifacts.
+- [x] Add smooth layered award motion and improve the mobile scene composition.
+- [x] Validate and deliver the awards-showcase checkpoint.
+
 ## Contact Finale Redesign
 
 - [x] Rebuild the contact scene into a layered, clearer maximalist finale.
