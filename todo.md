@@ -1,5 +1,16 @@
 # Portfolio Upgrade Checklist
 
+## Kinetic Maximalism Upgrade
+
+- [x] Add auto-advancing behavior and direct swipe gestures to the GitHub carousel.
+- [x] Add richer, GPU-safe background and component motion throughout the page.
+- [x] Validate and deliver the kinetic interaction checkpoint.
+
+## Shared Preview Synchronization
+
+- [ ] Pull the newest shared project version and refresh the preview.
+- [ ] Confirm the synced version.
+
 ## Cursor Interaction Upgrade
 
 - [x] Add a subtle trailing cursor layer for precise pointer feedback.
