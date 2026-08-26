@@ -1,5 +1,11 @@
 # Portfolio Upgrade Checklist
 
+## Premium Scrapbook Preloader
+
+- [x] Research component-catalogue preloader patterns and define a matching launch scene.
+- [x] Build the reusable preloader with resource-aware progress and smooth app handoff.
+- [x] Validate and deliver the preloader checkpoint.
+
 ## Mobile Layout Correction
 
 - [x] Restore balanced spacing and text-artifact separation in the awards showcase.
