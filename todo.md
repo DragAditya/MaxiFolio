@@ -1,5 +1,11 @@
 # Portfolio Upgrade Checklist
 
+## Contact Finale Redesign
+
+- [x] Rebuild the contact scene into a layered, clearer maximalist finale.
+- [x] Add tactile contact controls and smooth staged motion with mobile-first spacing.
+- [x] Validate and deliver the contact-finale checkpoint.
+
 ## Skill Artifact and Motion-Smoothness Pass
 
 - [x] Replace the basic smiley with a distinct animated skill artifact.
