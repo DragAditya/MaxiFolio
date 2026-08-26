@@ -1,5 +1,11 @@
 # Portfolio Upgrade Checklist
 
+## Skill Artifact and Motion-Smoothness Pass
+
+- [x] Replace the basic smiley with a distinct animated skill artifact.
+- [x] Reduce concurrent visual effects and favor composited animation for smoother scrolling.
+- [x] Validate and deliver the smoother-motion checkpoint.
+
 ## Maximalist Skills Playground
 
 - [x] Expand the skills section with layered capability components and interactive details.
