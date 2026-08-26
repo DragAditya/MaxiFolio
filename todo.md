@@ -6,3 +6,17 @@
 - [x] Upgrade the visual narrative, components, and resume-derived content.
 - [x] Validate desktop/mobile interaction behavior, accessibility, and production build.
 - [ ] Save and deliver an updated project checkpoint.
+
+## Integration Check
+
+- [x] Inspect whether a 21st.dev MCP connector is configured for this session.
+- [x] Verify the official 21st.dev MCP endpoint and authentication flow.
+- [x] Prepare the workspace-specific connection steps.
+- [x] Connect and verify 21st.dev MCP catalogue search.
+
+## 21st.dev Portfolio Enhancement
+
+- [x] Search for 4–5 component candidates matched to the portfolio’s visual system.
+- [x] Retrieve and evaluate the strongest compatible component implementations.
+- [x] Integrate the approved component patterns into the portfolio.
+- [x] Validate the revised desktop and mobile experience.

@@ -29,7 +29,7 @@ import {
 } from "lucide-react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { BlurInWords, MagneticLink, SpotlightCard } from "@/components/motion-primitives";
+import { BlurInWords, MagneticLink, SceneDock, ScrollMeter, SpotlightCard, TextBlurIn } from "@/components/motion-primitives";
 
 const navItems = [
   ["01", "Work", "#work"],
@@ -95,7 +95,7 @@ export default function Home() {
   return (
     <div className="portfolio-shell fluid-edition">
       <a href="#main" className="skip-link">Skip to content</a>
-      <motion.div className="scroll-meter" style={{ scaleX: fluidProgress }} aria-hidden="true" />
+      <ScrollMeter progress={fluidProgress} />
 
       <header className="topbar">
         <a href="#home" className="brand-lockup" aria-label="Aditya Wagh home">
@@ -123,12 +123,21 @@ export default function Home() {
           {navItems.map(([index, label, href]) => <a key={label} className={activeSection === href.slice(1) ? "is-active" : ""} href={href} aria-label={`Go to ${label}`}><span className="index-rail-orbit"><i /></span><small>{index}</small><b>{label}</b></a>)}
         </div>
       </aside>
+      <SceneDock
+        activeHref={`#${activeSection}`}
+        items={[
+          { label: "Work", href: "#work", icon: <Code2 size={16} /> },
+          { label: "Profile", href: "#profile", icon: <Sparkles size={16} /> },
+          { label: "Skills", href: "#capabilities", icon: <Cloud size={16} /> },
+          { label: "Contact", href: "#contact", icon: <Mail size={16} /> },
+        ]}
+      />
 
       <main id="main">
         <section id="home" ref={heroRef} className="hero-section hero-locked-scene scene-lock">
           <div className="hero-grid-line hero-grid-left" aria-hidden="true" /><div className="hero-grid-line hero-grid-right" aria-hidden="true" />
           <motion.div className="hero-copy" style={{ opacity: heroCopyOpacity }}>
-            <div className="hero-kicker"><span className="status-pulse" /> MCA STUDENT · SOFTWARE DEVELOPER · BUILDER</div>
+            <div className="hero-kicker"><span className="status-pulse" /><TextBlurIn className="hero-kicker-text" delay={.05}>MCA STUDENT · SOFTWARE DEVELOPER · BUILDER</TextBlurIn></div>
             <h1 className="hero-title hero-title-fluid">
               <BlurInWords delay={0.12} words={["Software", "that", "keeps"]} />
               <span className="hero-title-line"><BlurInWords delay={0.31} words={[<em key="teams">teams</em>, "moving", "."]} /></span>

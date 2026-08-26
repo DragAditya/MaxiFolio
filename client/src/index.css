@@ -84,6 +84,7 @@ button { font: inherit; }
 .topbar-contact { min-width: 120px; display: inline-flex; justify-content: flex-end; gap: 8px; align-items: center; color: #0a5cff; font-size: 12px; font-weight: 700; }
 .menu-button { display: none; margin-left: auto; background: transparent; border: 0; color: #172230; padding: .5rem; }
 .mobile-menu { display: none; }
+.mobile-scene-dock { display: none; }
 .index-rail { position: fixed; z-index: 25; right: 1.35rem; top: 50%; display: flex; flex-direction: column; align-items: flex-end; gap: .7rem; padding: .85rem .55rem; border: 1px solid rgba(23,34,48,.10); background: rgba(247,245,240,.58); box-shadow: 0 14px 35px rgba(23,34,48,.06); backdrop-filter: blur(12px); transform: translateY(-42%); color: #76818c; }
 .index-rail::before { content: ""; position: absolute; right: 11px; top: 42px; bottom: 12px; width: 1px; background: linear-gradient(to bottom, rgba(10,92,255,.14), rgba(23,34,48,.15), rgba(10,92,255,.14)); }
 .index-rail-label { position: relative; z-index: 1; font: 500 8px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; writing-mode: vertical-rl; transform: rotate(180deg); }
@@ -103,6 +104,7 @@ button { font: inherit; }
 .hero-grid-right { right: clamp(1.25rem, 6vw, 7rem); }
 .hero-copy { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding-bottom: 1.8rem; }
 .hero-kicker, .section-eyebrow { display: flex; align-items: center; gap: 8px; color: #5c6470; font: 500 10px/1.1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; }
+.hero-kicker-text { margin: 0; }.text-blur-unit { display: inline-block; }
 .status-pulse { width: 7px; height: 7px; border-radius: 50%; background: #0a5cff; box-shadow: 0 0 0 5px rgba(10,92,255,.10); }
 .hero-title { max-width: 720px; margin: 1.45rem 0 1.6rem; color: #172230; font-size: clamp(3.2rem, 5.7vw, 6.15rem); font-weight: 600; letter-spacing: -.06em; line-height: .95; }
 .hero-title-fluid { display: flex; flex-direction: column; gap: .02em; overflow: visible; }
@@ -271,6 +273,7 @@ h2 { margin: 0; color: #172230; font-size: clamp(2.6rem, 5vw, 5.5rem); font-weig
   .mobile-menu a { display: flex; align-items: center; gap: 10px; padding: 1rem 1.4rem; border-bottom: 1px solid rgba(23,34,48,.08); color: #172230; font-weight: 600; }
   .mobile-menu a small { color: #8a929b; font: 500 9px/1 "IBM Plex Mono", monospace; }.mobile-menu a svg { margin-left: auto; }
   .mobile-menu .mobile-menu-contact { background: #172230; color: white; font-size: 13px; }
+  .mobile-scene-dock { position: fixed; z-index: 38; right: 50%; bottom: 1rem; display: block; width: auto; transform: translateX(50%); padding: 5px; border: 1px solid rgba(23,34,48,.14); background: rgba(247,245,240,.82); box-shadow: 0 14px 32px rgba(23,34,48,.16); backdrop-filter: blur(17px); }.mobile-scene-dock ul { display: flex; align-items: center; margin: 0; padding: 0; list-style: none; }.mobile-scene-dock li { height: 2.9rem; overflow: hidden; }.mobile-scene-dock a { display: flex; align-items: center; gap: 7px; width: 100%; height: 100%; padding: 0 .65rem; color: #64707c; white-space: nowrap; }.mobile-scene-dock a.is-active { color: #0a5cff; }.dock-icon { display: inline-grid; flex: 0 0 auto; place-items: center; width: 1.55rem; height: 1.55rem; border: 1px solid currentColor; border-radius: 50%; }.dock-label { font: 600 9px/1 "IBM Plex Mono", monospace; letter-spacing: .03em; }.site-footer { padding-bottom: 5.1rem; }
   .fluid-edition main { scroll-snap-type: none; }.hero-section { grid-template-columns: 1fr; min-height: auto; padding-top: 5rem; }
   .hero-copy { padding-bottom: 2rem; }.hero-visual { min-height: 360px; max-width: 700px; width: 100%; }.hero-image-frame { inset: 0 -3rem -1rem -2rem; }.hero-footnote { position: relative; left: auto; right: auto; bottom: auto; grid-column: 1; margin-top: 3.6rem; flex-wrap: wrap; }.footnote-rule { flex: 1; min-width: 30px; }
   .profile-section, .timeline-section { grid-template-columns: 1fr; }.profile-panel { min-height: 550px; }.achievements-panel { padding-bottom: 4.5rem; }
