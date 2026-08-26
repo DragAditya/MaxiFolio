@@ -5,6 +5,7 @@
 import { ArrowDownRight, ArrowUpRight, Award, BriefcaseBusiness, ChevronLeft, ChevronRight, Code2, ExternalLink, GitFork, Github, GraduationCap, Heart, Linkedin, Mail, MapPin, Menu, Phone, Sparkles, Star, Terminal, WandSparkles, X, Zap } from "lucide-react";
 import { motion, useInView, useMotionValue, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import PortfolioDock from "../components/PortfolioDock";
 
 const heroImage = "/manus-storage/aditya-maximal-hero-collage_c38579be.png";
 const markImage = "/manus-storage/aditya-maximal-aw-sticker_6f1e066f.png";
@@ -119,6 +120,7 @@ export default function Home() {
 
   return <div className="scrapbook-site has-custom-cursor">
     <CursorEffect />
+    <PortfolioDock />
     <motion.div className="site-scroll-progress" style={{ scaleX: pageProgress }} aria-hidden="true" />
     <header className="scrapbook-header">
       <a href="#home" className="scrapbook-brand" data-cursor><img src={markImage} alt="AW logo" /><span>ADITYA<br />WAGH</span><small>DEV PORTFOLIO<br />2026</small></a>

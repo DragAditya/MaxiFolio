@@ -1,5 +1,11 @@
 # Portfolio Upgrade Checklist
 
+## Scrapbook Portfolio Dock
+
+- [x] Inspect the referenced ReactBits dock behavior and map it to portfolio navigation.
+- [x] Build a 60px floating dock with 40px base items and 70px magnification.
+- [x] Validate and deliver the dock navigation checkpoint.
+
 ## Premium Scrapbook Preloader
 
 - [x] Research component-catalogue preloader patterns and define a matching launch scene.
