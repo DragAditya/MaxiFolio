@@ -37,19 +37,34 @@ function CursorEffect() {
   const pointerY = useMotionValue(-100);
   const ringX = useSpring(pointerX, { stiffness: 180, damping: 20, mass: .18 });
   const ringY = useSpring(pointerY, { stiffness: 180, damping: 20, mass: .18 });
+  const trailOneX = useSpring(pointerX, { stiffness: 96, damping: 22, mass: .48 });
+  const trailOneY = useSpring(pointerY, { stiffness: 96, damping: 22, mass: .48 });
+  const trailTwoX = useSpring(pointerX, { stiffness: 58, damping: 23, mass: .72 });
+  const trailTwoY = useSpring(pointerY, { stiffness: 58, damping: 23, mass: .72 });
   const [active, setActive] = useState(false);
+  const [projectMode, setProjectMode] = useState(false);
 
   useEffect(() => {
     if (reducedMotion) return;
-    const move = (event: PointerEvent) => { pointerX.set(event.clientX); pointerY.set(event.clientY); setActive(true); };
-    const leave = () => setActive(false);
+    const move = (event: PointerEvent) => {
+      pointerX.set(event.clientX);
+      pointerY.set(event.clientY);
+      setActive(true);
+      setProjectMode(event.target instanceof Element && Boolean(event.target.closest("[data-cursor-project]")));
+    };
+    const leave = () => { setActive(false); setProjectMode(false); };
     window.addEventListener("pointermove", move);
     document.documentElement.addEventListener("mouseleave", leave);
     return () => { window.removeEventListener("pointermove", move); document.documentElement.removeEventListener("mouseleave", leave); };
   }, [pointerX, pointerY, reducedMotion]);
 
   if (reducedMotion) return null;
-  return <><motion.span className={`cursor-orbit ${active ? "is-visible" : ""}`} style={{ x: ringX, y: ringY }} aria-hidden="true" /><motion.span className={`cursor-core ${active ? "is-visible" : ""}`} style={{ x: pointerX, y: pointerY }} aria-hidden="true" /></>;
+  return <>
+    <motion.span className={`cursor-trail cursor-trail-one ${active ? "is-visible" : ""}`} style={{ x: trailOneX, y: trailOneY }} aria-hidden="true" />
+    <motion.span className={`cursor-trail cursor-trail-two ${active ? "is-visible" : ""}`} style={{ x: trailTwoX, y: trailTwoY }} aria-hidden="true" />
+    <motion.span className={`cursor-orbit ${active ? "is-visible" : ""} ${projectMode ? "is-project" : ""}`} style={{ x: ringX, y: ringY }} aria-hidden="true"><span>OPEN ↗</span></motion.span>
+    <motion.span className={`cursor-core ${active ? "is-visible" : ""} ${projectMode ? "is-project" : ""}`} style={{ x: pointerX, y: pointerY }} aria-hidden="true" />
+  </>;
 }
 
 function relativePosition(index: number, activeIndex: number, total: number) {
@@ -100,7 +115,7 @@ export default function Home() {
 
       <div className="moving-tape"><div>{["AI TOOLS", "DEVELOPER TOOLS", "PRIVATE WORKSPACES", "GOOD IDEAS", "LET&apos;S BUILD", "AI TOOLS", "DEVELOPER TOOLS", "PRIVATE WORKSPACES", "GOOD IDEAS", "LET&apos;S BUILD"].map((item, i) => <span key={i}><b>✦</b>{item}</span>)}</div></div>
 
-      <section id="projects" className="scrapbook-section projects-max"><div className="section-intro"><p className="mini-tag pink-tag">01 / SELECTED PROJECTS</p><h2>Projects I&apos;ve<br /><span>built.</span></h2><p>Real tools for developers and teams. Each card explains the problem and the stack.</p></div><div className="project-collage-grid">{projects.map((project, i) => <motion.article key={project.name} className={`max-project-card ${project.color}`} data-cursor whileHover={reducedMotion ? undefined : { y: -13, rotate: i === 1 ? -2.5 : 2.5, scale: 1.018 }} transition={{ type: "spring", stiffness: 280, damping: 20 }}><div className="card-paper-tape" /><div className="max-card-top"><span>{project.label}</span><b>0{i + 1}</b></div><div className="project-image-wrap"><img src={project.image} alt={`${project.name} project artwork`} /><span>HOVER TO EXPLORE</span></div><div className="max-project-copy"><h3>{project.name}</h3><p>{project.copy}</p><div className="tag-row">{project.tags.map((tag) => <i key={tag}>{tag}</i>)}</div><a className="glass-action project-glass-action" href={project.link} target={project.link.startsWith("http") ? "_blank" : undefined} rel="noreferrer" data-cursor>{project.cta} {project.link.startsWith("http") ? <ExternalLink size={14} /> : <ArrowUpRight size={14} />}</a></div></motion.article>)}</div><div className="projects-doodle"><span>build,<br />learn,<br />repeat!</span><WandSparkles size={28} /></div></section>
+      <section id="projects" className="scrapbook-section projects-max"><div className="section-intro"><p className="mini-tag pink-tag">01 / SELECTED PROJECTS</p><h2>Projects I&apos;ve<br /><span>built.</span></h2><p>Real tools for developers and teams. Each card explains the problem and the stack.</p></div><div className="project-collage-grid">{projects.map((project, i) => <motion.article key={project.name} className={`max-project-card ${project.color}`} data-cursor whileHover={reducedMotion ? undefined : { y: -13, rotate: i === 1 ? -2.5 : 2.5, scale: 1.018 }} transition={{ type: "spring", stiffness: 280, damping: 20 }}><div className="card-paper-tape" /><div className="max-card-top"><span>{project.label}</span><b>0{i + 1}</b></div><div className="project-image-wrap"><img src={project.image} alt={`${project.name} project artwork`} /><span>HOVER TO EXPLORE</span></div><div className="max-project-copy"><h3>{project.name}</h3><p>{project.copy}</p><div className="tag-row">{project.tags.map((tag) => <i key={tag}>{tag}</i>)}</div><a className="glass-action project-glass-action" href={project.link} target={project.link.startsWith("http") ? "_blank" : undefined} rel="noreferrer" data-cursor data-cursor-project>{project.cta} {project.link.startsWith("http") ? <ExternalLink size={14} /> : <ArrowUpRight size={14} />}</a></div></motion.article>)}</div><div className="projects-doodle"><span>build,<br />learn,<br />repeat!</span><WandSparkles size={28} /></div></section>
 
       <section id="github" className="github-showcase"><div className="github-heading"><div><p className="mini-tag blue-tag">02 / GITHUB PINS</p><h2>More things<br />I&apos;ve <span>made.</span></h2></div><p>Six pinned repositories from <a href="https://github.com/DragAditya" target="_blank" rel="noreferrer" data-cursor>@DragAditya <Github size={14} /></a>. Pick a card to bring it forward.</p></div><div className="coverflow-stage" aria-label="Pinned GitHub repositories">{githubProjects.map((repo, index) => { const position = relativePosition(index, activeRepo, githubProjects.length); const isActive = index === activeRepo; return <motion.button key={repo.name} type="button" className={`coverflow-card ${repo.color} ${isActive ? "is-active" : ""}`} onClick={() => setActiveRepo(index)} aria-pressed={isActive} data-cursor style={{ zIndex: 20 - Math.abs(position) }} animate={{ x: position * 255, scale: isActive ? 1 : Math.abs(position) === 1 ? .79 : .62, y: isActive ? 0 : 30 + Math.abs(position) * 10, rotateY: position * -17, rotateZ: position * 2.5, opacity: Math.abs(position) > 2 ? 0 : isActive ? 1 : .68 }} transition={{ type: "spring", stiffness: 260, damping: 27, mass: .55 }}><span className="repo-card-top"><i />{repo.language}<b>{String(index + 1).padStart(2, "0")}</b></span><strong>{repo.display}</strong><span>{repo.name}</span><div className="repo-card-footer"><Star size={13} /> {repo.stars}<GitFork size={13} /> {repo.forks}</div></motion.button>; })}</div><div className="coverflow-detail"><div className="coverflow-controls"><button type="button" onClick={() => goRepo(-1)} aria-label="Previous GitHub project" data-cursor><ChevronLeft size={18} /></button><span>{String(activeRepo + 1).padStart(2, "0")} / {String(githubProjects.length).padStart(2, "0")}</span><button type="button" onClick={() => goRepo(1)} aria-label="Next GitHub project" data-cursor><ChevronRight size={18} /></button></div><div className="repo-detail-copy"><p>PINNED REPOSITORY / {currentRepo.language}</p><h3>{currentRepo.display}</h3><span>{currentRepo.description}</span></div><div className="repo-detail-actions"><a href={currentRepo.link} target="_blank" rel="noreferrer" data-cursor>Open GitHub <Github size={15} /></a>{currentRepo.homepage && <a href={currentRepo.homepage} target="_blank" rel="noreferrer" data-cursor>Live site <ExternalLink size={15} /></a>}</div></div></section>
 

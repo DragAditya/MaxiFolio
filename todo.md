@@ -1,5 +1,11 @@
 # Portfolio Upgrade Checklist
 
+## Cursor Interaction Upgrade
+
+- [x] Add a subtle trailing cursor layer for precise pointer feedback.
+- [x] Add a project-link cursor shape and label state.
+- [x] Validate and deliver the cursor enhancement checkpoint.
+
 - [x] Extract all portfolio-relevant content from the updated CV.
 - [x] Review 21st.dev component patterns compatible with the current React/Tailwind project.
 - [x] Define the page-lock and fluid-motion system with reduced-motion alternatives.
