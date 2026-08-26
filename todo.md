@@ -1,5 +1,11 @@
 # Portfolio Upgrade Checklist
 
+## Scroll-Reactive 3D Transition Upgrade
+
+- [x] Add layered 3D transition portals between the major portfolio scenes.
+- [x] Connect the portals and section planes to scroll progress with reduced-motion safeguards.
+- [x] Validate and deliver the 3D transition checkpoint.
+
 ## Kinetic Maximalism Upgrade
 
 - [x] Add auto-advancing behavior and direct swipe gestures to the GitHub carousel.
