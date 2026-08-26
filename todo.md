@@ -29,3 +29,10 @@
 - [x] Replace the existing portfolio implementation with the new experience.
 - [x] Validate desktop/mobile performance, accessibility, and production build.
 - [ ] Save and deliver the replacement portfolio checkpoint.
+
+## Clean Developer Portfolio Reset
+
+- [x] Write clear, simple-English hiring-focused portfolio copy.
+- [x] Replace the current visual system with a clean developer portfolio layout.
+- [x] Validate the new desktop and mobile presentation.
+- [ ] Save and deliver the clean portfolio checkpoint.
