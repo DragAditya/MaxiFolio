@@ -142,3 +142,16 @@
   .skills-playground { grid-template-columns:360px minmax(0,1fr); }.skills-playground-main { grid-template-columns:170px minmax(0,1fr); }.skills-playground .skill-sticker { min-height:172px; }.skills-playground .skill-sticker p { font-size:15px; }.skill-command-strip { min-height:48px; }.skill-mini-stack { right:-.65rem; bottom:5rem; transform:scale(.9); }
   .contact-control-room { grid-template-columns:410px minmax(0,1fr); }.contact-control-grid { grid-template-columns:340px minmax(0,1fr); max-width:760px; }.contact-identity-card { min-height:310px; }.contact-route-grid>a { min-height:65px; }.contact-console { min-height:52px; }.contact-lead { align-self:center; }.contact-lead h2 { max-width:460px; font-size:clamp(3.9rem,5.2vw,5.7rem); }.contact-orbit-one { right:5%; top:16%; opacity:.58; }
 }
+
+/* Mobile contact dead-space fix: decorative objects may not displace the opening action or create an empty chapter field. */
+@media (max-width:600px) {
+  .contact-control-room { display:block; min-height:0; gap:0; padding-top:2.45rem!important; padding-bottom:3rem; }
+  .contact-control-room::after { opacity:.13; mask-image:radial-gradient(ellipse at 74% 44%,black,transparent 66%); }
+  .contact-control-room .contact-burst { display:none!important; }
+  .contact-control-room .contact-orbit-one { display:block; width:145px; height:145px; top:-44px; right:-48px; opacity:.33; }
+  .contact-control-room .contact-orbit-two { display:none!important; }
+  .contact-control-room .contact-lead { position:relative; z-index:2; margin:0; padding:0; }
+  .contact-control-room .contact-index { margin:0 0 .85rem; }
+  .contact-control-room .contact-lead h2 { margin:.75rem 0 1rem; }
+  .contact-control-room .contact-control-grid { position:relative; z-index:2; margin-top:2rem; padding-top:0; }
+}

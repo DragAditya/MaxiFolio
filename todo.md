@@ -1,5 +1,11 @@
 # Portfolio Upgrade Checklist
 
+## Mobile Contact Dead-Space Fix
+
+- [x] Remove the excessive empty field before the mobile contact heading.
+- [x] Reposition mobile decorative orbit/burst details behind or beside the contact content.
+- [x] Validate and deliver the compact mobile contact checkpoint.
+
 ## Desktop Visual-System Correction
 
 - [x] Audit the repeated desktop hierarchy, density, alignment, and composition failures across the provided screenshots.

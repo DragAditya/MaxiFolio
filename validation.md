@@ -54,3 +54,5 @@ The advanced desktop dock refinement passed TypeScript/build checks and desktop/
 | Motion and accessibility | Passed | Primary project/repository interactions remain intact; secondary desktop ornament has been reduced. Focusable anchors and visible focus styles remain available, and reduced-motion rules still suppress non-essential movement. |
 
 The independent visual reviewer again recommended the historical Quiet Precision direction. That recommendation conflicts with the user’s explicit request to preserve a maximalist Pinterest/scrapbook identity, so the correction follows the user’s direction: it disciplines alignment, density, color roles, and evidence hierarchy without removing the site’s bright material language.
+
+The mobile contact dead-space fix passed TypeScript/build checks and a full mobile visual check. The circular contact burst was the source of the large empty visual field before the opening contact action. It is now removed on mobile; the smaller orbit is repositioned behind the lead, the contact section starts immediately after the awards rail, and the contact controls retain their existing compact mobile flow.
