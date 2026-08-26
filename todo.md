@@ -59,3 +59,17 @@
 - [x] Add animated hero, cursor, hover, parallax, carousel, and GitHub project sections.
 - [x] Validate performance, accessibility, and responsive behavior.
 - [ ] Save and deliver the upgraded portfolio checkpoint.
+
+## Shared Preview Sync
+
+- [ ] Restart the preview using the latest shared-project code.
+- [ ] Confirm the refreshed preview version to the user.
+
+## Luxury Mixed-Media Mega-Build
+
+- [x] Check the current 21st.dev component retrieval allowance and available patterns.
+- [x] Define the ASCII, 3D parallax, pixel, glass, and luxury typography system.
+- [x] Create enhanced visual assets and interactive primitives.
+- [x] Build richer mixed-media sections and advanced interactions.
+- [x] Validate desktop/mobile visual quality and interaction performance.
+- [ ] Save and deliver the mega-build portfolio checkpoint.
