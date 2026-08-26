@@ -59,3 +59,11 @@
 - [x] Add animated hero, cursor, hover, parallax, carousel, and GitHub project sections.
 - [x] Validate performance, accessibility, and responsive behavior.
 - [ ] Save and deliver the upgraded portfolio checkpoint.
+
+## Glass + 3D Hero Interaction Upgrade
+
+- [x] Translate the supplied chrome, pixel, ASCII, and editorial references into original interaction rules.
+- [x] Add glass hover effects to project links and primary controls.
+- [x] Add pointer and scroll-driven 3D parallax to the hero.
+- [x] Validate the enhanced desktop and mobile interaction experience.
+- [ ] Save and deliver the interaction-enhanced checkpoint.

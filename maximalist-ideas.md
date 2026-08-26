@@ -15,3 +15,7 @@ The visual review recommended returning to the earlier quiet-mineral direction. 
 ## Peak Interaction Review Decision
 
 The interaction review again recommended replacing the colourful scrapbook visual language with Quiet Precision. This conflicts with the user’s explicit request for a maximalist Pinterest aesthetic, so the collage palette, paper layering, and playful type remain. The accepted quality rule is that interaction effects and GitHub carousel details must make projects easier to explore, never make the content harder to read.
+
+## Glass and Depth Addendum
+
+The supplied reference imagery is not used as website content. It informs original chrome-glass hover layers, restrained iridescent highlight motion, deep-space contrast, editorial cobalt flashes, and ASCII-style interaction mood. The overall Pinterest scrapbook direction remains the active user-selected style; quiet-mineral review recommendations conflict with that request and are therefore not adopted.
