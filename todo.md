@@ -1,5 +1,11 @@
 # Portfolio Upgrade Checklist
 
+## Maximalist Skills Playground
+
+- [x] Expand the skills section with layered capability components and interactive details.
+- [x] Add fluid orbit, marquee, hover, and touch-safe motion to the skills scene.
+- [x] Validate and deliver the maximalist skills checkpoint.
+
 ## Scroll-Reactive 3D Transition Upgrade
 
 - [x] Add layered 3D transition portals between the major portfolio scenes.
