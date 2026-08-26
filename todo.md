@@ -1,5 +1,11 @@
 # Portfolio Upgrade Checklist
 
+## Mobile Layout Correction
+
+- [x] Restore balanced spacing and text-artifact separation in the awards showcase.
+- [x] Rebalance contact heading, signal chips, and footer hierarchy on mobile.
+- [x] Validate and deliver the layout-correction checkpoint.
+
 ## Awards Showcase Redesign
 
 - [x] Replace the repetitive award cards with distinct recognition artifacts.
