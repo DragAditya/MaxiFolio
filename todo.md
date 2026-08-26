@@ -1,5 +1,11 @@
 # Portfolio Upgrade Checklist
 
+## Distinct Mobile Hero Rebuild
+
+- [x] Replace the current mobile hero composition with a visibly different stacked opening scene.
+- [x] Add a stronger mobile reveal sequence and transition into the project journey.
+- [x] Validate and deliver the differentiated mobile hero checkpoint.
+
 ## Mobile Hero Refinement
 
 - [x] Improve mobile headline, description, CTA, and illustration spacing.
