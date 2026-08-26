@@ -1,199 +1,85 @@
 /**
- * Quiet Precision — fluid edition: Apple-like product storytelling with scene locking,
- * a cobalt orbital index, and 21st-inspired motion primitives tailored to Aditya Wagh’s CV.
+ * Chromatic Index: a ground-up portfolio system with Swiss editorial structure,
+ * index-board layouts, and locally adapted 21st.dev interaction patterns.
  */
-import {
-  ArrowDownRight,
-  ArrowUpRight,
-  Award,
-  BadgeCheck,
-  BriefcaseBusiness,
-  Cloud,
-  Code2,
-  ExternalLink,
-  Github,
-  GraduationCap,
-  Linkedin,
-  Mail,
-  MapPin,
-  Menu,
-  MousePointer2,
-  Network,
-  PackageCheck,
-  Phone,
-  Play,
-  ShieldCheck,
-  Sparkles,
-  Terminal,
-  X,
-} from "lucide-react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import { BlurInWords, MagneticLink, SceneDock, ScrollMeter, SpotlightCard, TextBlurIn } from "@/components/motion-primitives";
+import { ArrowDownRight, ArrowUpRight, Award, BriefcaseBusiness, Code2, Download, ExternalLink, Github, GraduationCap, Linkedin, Mail, MapPin, Menu, Network, Package, Sparkles, X, Zap } from "lucide-react";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
+import { useEffect, useState } from "react";
+import { BlurWords, ExpandRow, IndexDock, MagneticAnchor, NumberTicker, SegmentedIndex, SignalMarquee, TiltSurface } from "@/components/index-primitives";
 
-const navItems = [
-  ["01", "Work", "#work"],
-  ["02", "Profile", "#profile"],
-  ["03", "Capabilities", "#capabilities"],
-  ["04", "Contact", "#contact"],
+const nav = [["Work", "#work"], ["Index", "#index"], ["Toolbox", "#toolbox"], ["Contact", "#contact"]] as const;
+
+const projects = [
+  { id: "01", name: "ALTER", kind: "AI debugging platform", tone: "persimmon", line: "Find the break. Keep the flow.", copy: "A deployed debugging platform that combines automated code analysis, error detection, and real-time AI assistance for multi-language development.", tags: ["Python", "Gemini API", "REST", "Auth"], fact: "AI-enabled analysis", icon: <Sparkles size={18} /> },
+  { id: "02", name: "DRAGX", kind: "Developer CLI", tone: "blue", line: "Routine is a scriptable problem.", copy: "An npm-published command-line tool that streamlines Git workflows, project initialization, and developer environment setup.", tags: ["Node", "npm", "Git", "Automation"], fact: "15% workflow lift", icon: <Package size={18} />, link: "https://www.npmjs.com/package/dragx-cli" },
+  { id: "03", name: "PeerLock", kind: "P2P workspace", tone: "ink", line: "Collaboration without the surveillance layer.", copy: "A live collaborative workspace for up to ten people. Yjs CRDTs and WebRTC synchronize documents and chat while content stays off an application server.", tags: ["TypeScript", "Yjs", "WebRTC", "IndexedDB"], fact: "Local-first by design", icon: <Network size={18} />, link: "https://github.com/DragAditya/PeerLock-Workspace" },
 ];
 
-const technicalSkills = ["Python", "Java", "C++", "JavaScript", "TypeScript", "SQL"];
-const toolSkills = ["Git", "GitHub", "Linux", "VS Code", "Termux", "npm"];
-const platformSkills = ["Google Gemini API", "Claude AI", "AWS", "WebRTC", "Yjs CRDTs", "IndexedDB"];
+const modes: Record<string, { code: string; title: string; description: string; chips: string[] }> = {
+  BUILD: { code: "SYSTEM / 01", title: "Build what removes friction.", description: "I create AI-assisted applications, developer tooling, and dependable product surfaces with a focus on the next useful action.", chips: ["Python", "Java", "TypeScript", "SQL", "REST APIs"] },
+  SCALE: { code: "SYSTEM / 02", title: "Scale the part that works.", description: "From cloud patterns to real-time synchronization, I use the right infrastructure to make prototypes survive real usage.", chips: ["AWS", "Gemini API", "WebRTC", "Yjs CRDTs", "Auth"] },
+  OPERATE: { code: "SYSTEM / 03", title: "Operate with context.", description: "Software is not an isolated artifact. I bring developer discipline and experience with service, inventory, and business operations into the same frame.", chips: ["Git", "Linux", "npm", "Operations", "Process"] },
+};
 
-function SectionEyebrow({ index, children }: { index: string; children: React.ReactNode }) {
-  return (
-    <div className="section-eyebrow">
-      <span className="signal-dot" aria-hidden="true" />
-      <span>{index}</span>
-      <span className="eyebrow-line" aria-hidden="true" />
-      <span>{children}</span>
-    </div>
-  );
-}
-
-function ArrowLink({ href, children, dark = false, external = false }: { href: string; children: React.ReactNode; dark?: boolean; external?: boolean }) {
-  return (
-    <a className={`arrow-link ${dark ? "arrow-link-dark" : ""}`} href={href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined}>
-      <span>{children}</span>
-      <span className="arrow-link-icon">{external ? <ExternalLink size={14} strokeWidth={2.2} /> : <ArrowUpRight size={15} strokeWidth={2.2} />}</span>
-    </a>
-  );
-}
-
-function StatPill({ value, label }: { value: string; label: string }) {
-  return <div className="stat-pill"><strong>{value}</strong><span>{label}</span></div>;
-}
+function Stamp({ children }: { children: React.ReactNode }) { return <span className="index-stamp">{children}</span>; }
 
 export default function Home() {
+  const [active, setActive] = useState("work");
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("work");
-  const heroRef = useRef<HTMLElement>(null);
+  const [selectedProject, setSelectedProject] = useState("01");
+  const [mode, setMode] = useState("BUILD");
+  const [openLog, setOpenLog] = useState("mca");
   const { scrollYProgress } = useScroll();
-  const { scrollYProgress: heroProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const fluidProgress = useSpring(scrollYProgress, { stiffness: 90, damping: 25, mass: 0.28 });
-  const heroVisualY = useTransform(heroProgress, [0, 1], ["0%", "17%"]);
-  const heroVisualScale = useTransform(heroProgress, [0, 1], [1, 1.08]);
-  const heroCopyOpacity = useTransform(heroProgress, [0, 0.78], [1, 0.12]);
+  const progress = useSpring(scrollYProgress, { stiffness: 100, damping: 26, mass: .3 });
 
   useEffect(() => {
-    const sectionNodes = ["work", "profile", "capabilities", "contact"]
-      .map((id) => document.getElementById(id))
-      .filter(Boolean) as HTMLElement[];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.find((entry) => entry.isIntersecting);
-        if (visible) setActiveSection(visible.target.id);
-      },
-      { rootMargin: "-42% 0px -48% 0px" },
-    );
-    sectionNodes.forEach((node) => observer.observe(node));
+    const ids = nav.map((item) => item[1].slice(1));
+    const nodes = ids.map((id) => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+    const observer = new IntersectionObserver((entries) => { const entry = entries.find((current) => current.isIntersecting); if (entry) setActive(entry.target.id); }, { rootMargin: "-45% 0px -45% 0px" });
+    nodes.forEach((node) => observer.observe(node));
     return () => observer.disconnect();
   }, []);
 
-  return (
-    <div className="portfolio-shell fluid-edition">
-      <a href="#main" className="skip-link">Skip to content</a>
-      <ScrollMeter progress={fluidProgress} />
+  const current = projects.find((project) => project.id === selectedProject) ?? projects[0];
+  const activeMode = modes[mode];
 
-      <header className="topbar">
-        <a href="#home" className="brand-lockup" aria-label="Aditya Wagh home">
-          <img src="/manus-storage/aditya-orbital-mark_388bdd85.png" alt="" className="brand-mark" />
-          <span className="brand-wordmark">ADITYA<br />WAGH</span>
-          <span className="brand-index">AW / 02</span>
-        </a>
-        <nav className="desktop-nav" aria-label="Primary navigation">
-          {navItems.map(([index, label, href]) => (
-            <a key={label} className={activeSection === href.slice(1) ? "is-active" : ""} href={href}><small>{index}</small>{label}</a>
-          ))}
-        </nav>
-        <MagneticLink href="mailto:waghaditya312@gmail.com" className="topbar-contact"><span>Let&apos;s talk</span><ArrowUpRight size={16} /></MagneticLink>
-        <button className="menu-button" aria-label="Toggle navigation" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>{menuOpen ? <X size={20} /> : <Menu size={20} />}</button>
-      </header>
+  return <div className="chromatic-index">
+    <motion.div className="index-progress" style={{ scaleX: progress }} aria-hidden="true" />
+    <a className="index-skip" href="#work">Skip to work</a>
+    <header className="index-header">
+      <a href="#top" className="index-brand" aria-label="Aditya Wagh — home"><span className="index-monogram"><i />A<span>W</span></span><span className="index-name">ADITYA<br />WAGH</span><span className="index-edition">INDEX / 2026</span></a>
+      <nav className="index-nav" aria-label="Primary navigation">{nav.map(([label, href], index) => <a key={label} href={href} className={active === href.slice(1) ? "is-active" : ""}><small>0{index + 1}</small>{label}</a>)}</nav>
+      <MagneticAnchor href="mailto:waghaditya312@gmail.com" className="index-header-action">Start a useful conversation <ArrowUpRight size={15} /></MagneticAnchor>
+      <button className="index-menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="Open menu" aria-expanded={menuOpen}>{menuOpen ? <X /> : <Menu />}</button>
+    </header>
+    <AnimatePresence>{menuOpen && <motion.nav className="index-mobile-menu" initial={{ opacity: 0, y: -14 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -14 }}>{nav.map(([label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)}>{label}<ArrowDownRight size={17} /></a>)}</motion.nav>}</AnimatePresence>
+    <aside className="index-rail" aria-label="Narrative index"><span className="index-rail-caption">SCENE / 05</span><span className="index-rail-rule" />{nav.map(([label, href], index) => <a key={label} href={href} className={active === href.slice(1) ? "is-active" : ""}><i><b /></i><small>0{index + 1}</small><strong>{label}</strong></a>)}</aside>
 
-      <div className={`mobile-menu ${menuOpen ? "is-open" : ""}`}>
-        {navItems.map(([index, label, href]) => <a key={label} href={href} onClick={() => setMenuOpen(false)}><small>{index}</small>{label}<ArrowDownRight size={18} /></a>)}
-        <a className="mobile-menu-contact" href="mailto:waghaditya312@gmail.com" onClick={() => setMenuOpen(false)}>Start a conversation <ArrowUpRight size={17} /></a>
-      </div>
+    <main id="top">
+      <section className="index-hero">
+        <div className="index-hero-orbit orbit-a" /><div className="index-hero-orbit orbit-b" />
+        <div className="index-hero-meta"><Stamp>AVAILABLE FOR IMPACTFUL WORK</Stamp><span>JALGAON, INDIA <MapPin size={13} /></span></div>
+        <div className="index-hero-copy"><p className="index-eyebrow"><b />MCA STUDENT · SOFTWARE BUILDER · OPERATOR</p><h1><BlurWords text="Useful software" delay={.05} /><br /><span className="index-persimmon"><BlurWords text="moves the work" delay={.23} /></span><br /><BlurWords text="forward." delay={.39} /></h1><p className="index-hero-intro">I&apos;m Aditya Wagh. I create practical AI systems, workflow tools, and privacy-first collaborative products that help teams get unstuck.</p><div className="index-hero-actions"><MagneticAnchor href="#work" className="index-primary">Open selected work <ArrowDownRight size={18} /></MagneticAnchor><a href="#index" className="index-quiet-link">Read the index <span>↘</span></a></div></div>
+        <aside className="index-signal-machine" aria-label="Portfolio focus board"><div className="machine-top"><span>STATUS</span><b>ACTIVE</b></div><div className="machine-core"><span className="machine-dot" /><span className="machine-cross c1" /><span className="machine-cross c2" /><strong>AW</strong><small>MAKE<br />CLEAR</small></div><div className="machine-bottom"><span>FOCUS</span><b>AI / TOOLS / P2P</b></div></aside>
+        <div className="index-hero-footer"><span>SCROLL TO NAVIGATE</span><i /><span>NO. 001 — PERSONAL OPERATING SYSTEM</span></div>
+      </section>
 
-      <aside className="index-rail" aria-label="Portfolio progress">
-        <span className="index-rail-label">SCENE / 05</span><span className="index-rail-rule" aria-hidden="true" />
-        <div className="index-rail-items">
-          {navItems.map(([index, label, href]) => <a key={label} className={activeSection === href.slice(1) ? "is-active" : ""} href={href} aria-label={`Go to ${label}`}><span className="index-rail-orbit"><i /></span><small>{index}</small><b>{label}</b></a>)}
-        </div>
-      </aside>
-      <SceneDock
-        activeHref={`#${activeSection}`}
-        items={[
-          { label: "Work", href: "#work", icon: <Code2 size={16} /> },
-          { label: "Profile", href: "#profile", icon: <Sparkles size={16} /> },
-          { label: "Skills", href: "#capabilities", icon: <Cloud size={16} /> },
-          { label: "Contact", href: "#contact", icon: <Mail size={16} /> },
-        ]}
-      />
+      <SignalMarquee items={["AI-POWERED TOOLS", "DEVELOPER EXPERIENCE", "REAL-TIME SYSTEMS", "PRIVACY-FIRST COLLABORATION", "MAKE THE NEXT STEP CLEAR"]} />
 
-      <main id="main">
-        <section id="home" ref={heroRef} className="hero-section hero-locked-scene scene-lock">
-          <div className="hero-grid-line hero-grid-left" aria-hidden="true" /><div className="hero-grid-line hero-grid-right" aria-hidden="true" />
-          <motion.div className="hero-copy" style={{ opacity: heroCopyOpacity }}>
-            <div className="hero-kicker"><span className="status-pulse" /><TextBlurIn className="hero-kicker-text" delay={.05}>MCA STUDENT · SOFTWARE DEVELOPER · BUILDER</TextBlurIn></div>
-            <h1 className="hero-title hero-title-fluid">
-              <BlurInWords delay={0.12} words={["Software", "that", "keeps"]} />
-              <span className="hero-title-line"><BlurInWords delay={0.31} words={[<em key="teams">teams</em>, "moving", "."]} /></span>
-            </h1>
-            <motion.p className="hero-intro" initial={{ opacity: 0, y: 13 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65, duration: 0.55 }}>I&apos;m Aditya Wagh. I build production-grade AI tools, developer automation, and privacy-first collaborative systems designed for real use.</motion.p>
-            <motion.div className="hero-actions" initial={{ opacity: 0, y: 13 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.78, duration: 0.55 }}>
-              <MagneticLink href="#work" className="primary-action">Explore selected work <ArrowDownRight size={18} /></MagneticLink>
-              <MagneticLink href="mailto:waghaditya312@gmail.com" className="secondary-action">Contact me <ArrowUpRight size={16} /></MagneticLink>
-            </motion.div>
-          </motion.div>
-          <motion.div className="hero-visual" style={{ y: heroVisualY, scale: heroVisualScale }} aria-label="Abstract developer workbench artwork">
-            <div className="hero-image-frame"><img src="/manus-storage/aditya-hero-orbital-workbench_a4e0b34c.png" alt="Abstract precision-engineering workbench with a cobalt orbital marker" /></div>
-            <div className="hero-orbit-label"><span className="signal-dot" /> OBSERVE / BUILD / ITERATE</div>
-            <motion.div className="hero-spec-card" initial={{ opacity: 0, scale: .96 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: .72, type: "spring", stiffness: 180, damping: 18 }}><span className="spec-number">03</span><span>Production-grade<br />systems in motion.</span></motion.div>
-            <div className="hero-cursor-prompt"><MousePointer2 size={14} /><span>SCROLL TO EXPLORE</span></div>
-          </motion.div>
-          <div className="hero-footnote"><span>BASED IN</span><strong>Jalgaon, India</strong><span className="footnote-rule" /><span>FOCUS</span><strong>AI · AUTOMATION · PRIVACY</strong></div>
-        </section>
+      <section id="work" className="index-section index-work"><div className="index-section-top"><p className="index-eyebrow"><b />01 / SELECTED WORK</p><p>Three systems built around the moments where a workflow needs a better answer.</p></div><div className="index-work-heading"><h2>Open the proof,<br />not the pitch.</h2><span className="index-count">03 <small>SYSTEMS</small></span></div>
+        <div className="index-project-grid">{projects.map((project) => <TiltSurface key={project.id} className={`index-project-card ${project.tone} ${selectedProject === project.id ? "is-selected" : ""}`} onClick={() => setSelectedProject(project.id)}><div className="project-card-top"><span>{project.id}</span><span>{project.kind}</span></div><div className="project-card-art"><span className="project-shape a" /><span className="project-shape b" /><span className="project-shape c" /><i>{project.icon}</i></div><div className="project-card-bottom"><h3>{project.name}</h3><p>{project.line}</p><button aria-label={`Open ${project.name} proof`}>VIEW <ArrowUpRight size={15} /></button></div></TiltSurface>)}</div>
+        <AnimatePresence mode="wait"><motion.article key={current.id} className="index-project-proof" initial={{ opacity: 0, y: 14, clipPath: "inset(0 0 100% 0)" }} animate={{ opacity: 1, y: 0, clipPath: "inset(0 0 0% 0)" }} exit={{ opacity: 0, y: -10, clipPath: "inset(100% 0 0 0)" }} transition={{ duration: .45, ease: [0.16, 1, .3, 1] }}><div className="proof-index"><span>EXPANDED ENTRY</span><b>{current.id}</b></div><div><p className="index-eyebrow"><b />{current.kind}</p><h3>{current.name}</h3><p>{current.copy}</p></div><div className="proof-side"><div className="proof-tags">{current.tags.map((tag) => <span key={tag}>{tag}</span>)}</div><strong>{current.fact}</strong>{current.link ? <a href={current.link} target="_blank" rel="noreferrer">Open source <ExternalLink size={14} /></a> : <a href="mailto:waghaditya312@gmail.com">Request walkthrough <ArrowUpRight size={14} /></a>}</div></motion.article></AnimatePresence>
+      </section>
 
-        <section id="work" className="work-section section-frame scene-lock">
-          <div className="section-header"><SectionEyebrow index="01">Selected systems</SectionEyebrow><p className="section-aside">Three production builds that reduce friction across development, documentation, and collaboration.</p></div>
-          <div className="work-intro-grid"><h2>When the system clears,<br />the work can <em>move.</em></h2><div className="work-intro-copy"><p>From debugging to peer-to-peer teamwork, every project begins with an obstructed workflow and ends with a simpler next action.</p><span className="location-label"><MapPin size={15} /> INDIA · 2025–PRESENT</span></div></div>
+      <section id="index" className="index-section index-profile"><div className="index-profile-quote"><p className="index-eyebrow"><b />02 / PERSONAL INDEX</p><h2>Build systems<br />that make <span>space</span><br />to think.</h2><p>My approach is direct: understand the obstruction, build the clearest interaction, and keep enough context in the system for people to move with confidence.</p><MagneticAnchor href="mailto:waghaditya312@gmail.com" className="index-outline-action">Work with me <ArrowUpRight size={16} /></MagneticAnchor></div><div className="index-proof-board"><div className="proof-board-header"><span>LIVE INDEX</span><span>UPDATED / 2026</span></div><div className="proof-board-grid"><div className="proof-stat"><b><NumberTicker value={3} /></b><span>production-grade<br />systems featured</span></div><div className="proof-stat blue"><b><NumberTicker value={3} /></b><span>competition & research<br />recognitions</span></div><div className="proof-stat dark"><b><NumberTicker value={9} suffix=".23" /></b><span>MCA<br />CGPA</span></div><div className="proof-stat orange"><b><NumberTicker value={1} /></b><span>npm CLI<br />published</span></div></div><div className="proof-board-note"><Zap size={15} /> FOCUSED ON SOFTWARE THAT EARNS ITS PLACE IN A REAL WORKFLOW.</div></div></section>
 
-          <SpotlightCard className="project-card project-card-large">
-            <div className="project-content"><div className="project-topline"><span>01 / AI-POWERED DEBUGGING</span><span>LIVE PLATFORM</span></div><h3>ALTER<span className="project-slash">/</span><em> AI Code<br />Debugging</em></h3><p>A deployed AI debugging platform that combines automated code analysis, error detection, and real-time assistance with secure authentication and multi-language support.</p><div className="project-tags"><span>Python</span><span>Gemini API</span><span>REST APIs</span><span>Auth</span></div><ArrowLink href="#contact" dark>Request a walkthrough</ArrowLink></div>
-            <div className="project-art project-art-dark"><motion.img whileHover={{ scale: 1.055 }} transition={{ duration: .7, ease: [0.16, 1, .3, 1] }} src="/manus-storage/aditya-project-ai-debugging_069a37ab.png" alt="Abstract visualization of AI-assisted code debugging" /><div className="project-art-caption"><Sparkles size={15} /> AI-ENABLED ANALYSIS</div></div>
-          </SpotlightCard>
+      <section id="toolbox" className="index-section index-toolbox"><div className="index-section-top"><p className="index-eyebrow"><b />03 / TOOLBOX</p><p>Methods, platforms, and patterns used in service of an understandable product.</p></div><div className="index-toolbox-layout"><div><h2>A practical<br />technical range.</h2><SegmentedIndex items={Object.keys(modes)} active={mode} onChange={setMode} /></div><motion.article className="index-mode-panel" key={mode} initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: .35, ease: [0.16, 1, .3, 1] }}><span>{activeMode.code}</span><h3>{activeMode.title}</h3><p>{activeMode.description}</p><div>{activeMode.chips.map((chip) => <i key={chip}>{chip}</i>)}</div></motion.article></div></section>
 
-          <SpotlightCard className="project-card project-card-light">
-            <div className="project-art project-art-light"><motion.img whileHover={{ scale: 1.055 }} transition={{ duration: .7, ease: [0.16, 1, .3, 1] }} src="/manus-storage/aditya-project-cli-system_3fcf85de.png" alt="Abstract visualization of command-line workflow automation" /><div className="project-art-caption"><PackageCheck size={15} /> PUBLISHED ON NPM</div></div>
-            <div className="project-content"><div className="project-topline"><span>02 / CLI AUTOMATION</span><span>DRAGX</span></div><h3>DRAGX<span className="project-slash">/</span><em> Developer<br />CLI Tool</em></h3><p>A published command-line tool designed to streamline Git workflows, project initialization, and developer environment setup through automation scripting.</p><div className="project-statement"><strong>15%</strong><span>Approximate workflow<br />efficiency improvement</span></div><ArrowLink href="https://www.npmjs.com/package/dragx-cli" external>View npm package</ArrowLink></div>
-          </SpotlightCard>
+      <section className="index-section index-log"><div className="index-log-aside"><p className="index-eyebrow"><b />04 / LEARNING LOG</p><h2>Proof<br />of motion.</h2><p>Education, recognition, and operational experience kept in the same working record.</p></div><div className="index-log-rows"><ExpandRow title="Master of Computer Applications" eyebrow="2025—2027 / RCPET'S IMRD, SHIRPUR" open={openLog === "mca"} onToggle={() => setOpenLog(openLog === "mca" ? "" : "mca")}><div className="log-content"><GraduationCap size={22} /><p>Current postgraduate study with a <strong>9.23 CGPA</strong>, focused on applied software development and AI systems.</p><span>NOW IN PROGRESS</span></div></ExpandRow><ExpandRow title="BCA & practical operations" eyebrow="2022—2025 / JALGAON, MAHARASHTRA" open={openLog === "bca"} onToggle={() => setOpenLog(openLog === "bca" ? "" : "bca")}><div className="log-content"><BriefcaseBusiness size={22} /><p>Completed BCA with an <strong>8.93 CGPA</strong> while building firsthand experience in service, inventory, and business operations at Padmavati Jewellers.</p><span>FOUNDATION</span></div></ExpandRow><ExpandRow title="Recognition & credentials" eyebrow="2025—2026 / COMPETITIONS + CERTIFICATIONS" open={openLog === "recognition"} onToggle={() => setOpenLog(openLog === "recognition" ? "" : "recognition")}><div className="log-content"><Award size={22} /><p>Rank-II, Code Carnival 1.0; CSI Project Competition winner for DaemonDoc; Avishkar 2025 research presenter; AWS Solutions Architecture and virtual job simulations from Tata and BCG X.</p><span>DOCUMENTED</span></div></ExpandRow></div></section>
 
-          <SpotlightCard className="project-card project-card-peerlock">
-            <div className="project-content"><div className="project-topline"><span>03 / PRIVACY-FIRST COLLABORATION</span><span>LIVE PLATFORM</span></div><h3>PeerLock<span className="project-slash">/</span><em> Workspace</em></h3><p>A live peer-to-peer collaborative editor for up to ten people, using Yjs CRDTs and WebRTC to synchronize documents and chat without storing content on an application server.</p><div className="project-tags"><span>TypeScript</span><span>Yjs CRDTs</span><span>WebRTC</span><span>IndexedDB</span></div><ArrowLink href="https://github.com/DragAditya/PeerLock-Workspace" dark external>Explore on GitHub</ArrowLink></div>
-            <div className="peerlock-stage" aria-label="Abstract peer-to-peer network visualization"><div className="peerlock-grid" /><span className="peer-node node-one" /><span className="peer-node node-two" /><span className="peer-node node-three" /><span className="peer-node node-four" /><div className="peer-core"><Network size={27} /><span>LOCAL-FIRST<br />SYNC</span></div><div className="peerline line-one" /><div className="peerline line-two" /><div className="peerline line-three" /><div className="project-art-caption"><ShieldCheck size={15} /> CONTENT STAYS WITH THE TEAM</div></div>
-          </SpotlightCard>
-        </section>
-
-        <section id="profile" className="profile-section section-frame scene-lock">
-          <div className="profile-panel"><div className="profile-panel-top"><SectionEyebrow index="02">The profile</SectionEyebrow><span>ADITYA WAGH / 2026</span></div><div className="profile-statement"><span className="quote-mark">“</span><h2>Useful software is the kind that makes room for people to think.</h2></div><div className="profile-details"><p>I&apos;m pursuing a Master of Computer Applications and independently build software across AI-assisted development, cloud-oriented systems, and privacy-preserving collaboration.</p><a href="#capabilities" className="text-action">More on how I work <ArrowDownRight size={16} /></a></div><div className="profile-seal"><img src="/manus-storage/aditya-orbital-mark_388bdd85.png" alt="" /><span>AW<br />SYSTEMS</span></div></div>
-          <div className="achievements-panel"><div className="achievements-title"><Award size={19} /><span>Recognition / <em>selected</em></span></div><div className="achievement-list"><article className="achievement-item"><span className="achievement-index">01</span><div><h3>Rank-II Winner</h3><p>Code Carnival 1.0 Hackathon</p></div><span className="achievement-year">2025–26</span></article><article className="achievement-item"><span className="achievement-index">02</span><div><h3>CSI Project Competition Winner</h3><p>DaemonDoc · AI-powered documentation tool</p></div><span className="achievement-year">2025–26</span></article><article className="achievement-item"><span className="achievement-index">03</span><div><h3>Research Presenter</h3><p>Avishkar 2025 · district-level convention</p></div><span className="achievement-year">2025</span></article></div></div>
-        </section>
-
-        <section id="capabilities" className="capability-section section-frame scene-lock">
-          <div className="section-header capability-header"><SectionEyebrow index="03">Capabilities</SectionEyebrow><span className="capability-count">03 / 03</span></div>
-          <div className="capability-heading-row"><h2>A wide enough lens<br />to see the <em>whole system.</em></h2><p>I pair strong technical foundations with operational awareness, then use modern tools only where they create a clearer result.</p></div>
-          <div className="capability-grid"><SpotlightCard className="capability-card"><span className="capability-number">01</span><Code2 size={23} /><h3>Build</h3><p>Creating AI-powered applications, data-driven software, and automation tools with attention to quality and maintainability.</p><div className="skill-list">{technicalSkills.map((skill) => <span key={skill}>{skill}</span>)}</div></SpotlightCard><SpotlightCard className="capability-card capability-card-focus"><span className="capability-number">02</span><Cloud size={23} /><h3>Scale</h3><p>Applying cloud, APIs, authentication, and real-time architecture patterns to turn working prototypes into reliable products.</p><div className="skill-list">{platformSkills.map((skill) => <span key={skill}>{skill}</span>)}</div></SpotlightCard><SpotlightCard className="capability-card capability-card-soft"><span className="capability-number">03</span><Terminal size={23} /><h3>Operate</h3><p>Pairing developer fluency with practical working knowledge of day-to-day business systems, teams, and service.</p><div className="skill-list">{toolSkills.map((skill) => <span key={skill}>{skill}</span>)}</div></SpotlightCard></div>
-          <div className="certification-ribbon"><div className="certification-heading"><BadgeCheck size={18} /><span>Credentials / 2025</span></div><div className="certification-list"><span>AWS Solutions Architecture</span><span>Cybersecurity Analyst Job Simulation · Tata</span><span>Generative AI Job Simulation · BCG X</span></div></div>
-        </section>
-
-        <section className="timeline-section section-frame scene-lock"><div className="timeline-heading"><SectionEyebrow index="04">Trajectory</SectionEyebrow><h2>Learning the craft.<br /><em>Applying it early.</em></h2></div><div className="timeline-list"><article className="timeline-entry"><div className="timeline-date">2025 — 2027</div><div className="timeline-line"><span /></div><div className="timeline-content"><GraduationCap size={21} /><h3>Master of Computer Applications</h3><p>RCPET&apos;s IMRD, Shirpur</p><span className="timeline-detail">CGPA / 9.23</span></div></article><article className="timeline-entry"><div className="timeline-date">2022 — 2025</div><div className="timeline-line"><span /></div><div className="timeline-content"><GraduationCap size={21} /><h3>Bachelor of Computer Applications</h3><p>Pratap College – Autonomous, Jalgaon</p><span className="timeline-detail">CGPA / 8.93</span></div></article><article className="timeline-entry"><div className="timeline-date">2022 — 2025</div><div className="timeline-line"><span /></div><div className="timeline-content"><BriefcaseBusiness size={21} /><h3>Business Operations Associate</h3><p>Padmavati Jewellers, Maharashtra</p><span className="timeline-detail">SERVICE · INVENTORY · PROCESS</span></div></article></div></section>
-
-        <section id="contact" className="contact-section scene-lock"><div className="contact-grid-line" aria-hidden="true" /><SectionEyebrow index="05">Open for the next system</SectionEyebrow><h2>Have something<br />worth <em>building?</em></h2><p>I&apos;m always interested in thoughtful conversations around software, AI-enabled tools, privacy-first systems, and opportunities to grow with a strong team.</p><MagneticLink href="mailto:waghaditya312@gmail.com" className="contact-email">waghaditya312@gmail.com <ArrowUpRight size={23} /></MagneticLink><div className="contact-meta"><a href="tel:+918329177017"><Phone size={14} /> +91 8329177017</a><a href="https://www.linkedin.com/in/dragaditya" target="_blank" rel="noreferrer"><Linkedin size={14} /> LinkedIn</a><a href="https://github.com/DragAditya" target="_blank" rel="noreferrer"><Github size={14} /> GitHub</a></div><div className="contact-orbit"><img src="/manus-storage/aditya-orbital-mark_388bdd85.png" alt="" /></div></section>
-      </main>
-      <footer className="site-footer"><span className="footer-brand"><img src="/manus-storage/aditya-orbital-mark_388bdd85.png" alt="" />© 2026 ADITYA WAGH <b>AW / 02</b></span><span>DESIGNED FOR CLARITY <i /> BUILT WITH INTENT</span><a href="#home">BACK TO TOP <ArrowUpRight size={13} /></a></footer>
-    </div>
-  );
+      <section id="contact" className="index-contact"><div className="contact-sticker">AW<br />/ 26</div><p className="index-eyebrow"><b />05 / OPEN CHANNEL</p><h2>Make the next<br />workflow <span>lighter.</span></h2><p>Interested in practical software, developer tools, AI-enabled systems, or a team that values clear thinking? Let&apos;s talk.</p><MagneticAnchor href="mailto:waghaditya312@gmail.com" className="index-contact-email">waghaditya312@gmail.com <ArrowUpRight size={22} /></MagneticAnchor><div className="index-contact-links"><a href="https://www.linkedin.com/in/dragaditya" target="_blank" rel="noreferrer"><Linkedin size={15} />LinkedIn</a><a href="https://github.com/DragAditya" target="_blank" rel="noreferrer"><Github size={15} />GitHub</a><a href="tel:+918329177017"><Mail size={15} />+91 8329177017</a></div></section>
+    </main>
+    <IndexDock active={active} items={[{ label: "Work", href: "#work", icon: <Code2 size={15} /> }, { label: "Index", href: "#index", icon: <Sparkles size={15} /> }, { label: "Tools", href: "#toolbox", icon: <Zap size={15} /> }, { label: "Contact", href: "#contact", icon: <Mail size={15} /> }]} />
+    <footer className="index-footer"><span>© 2026 ADITYA WAGH</span><span>CHROMATIC INDEX / NO. 001</span><a href="#top">TOP <ArrowUpRight size={13} /></a></footer>
+  </div>;
 }

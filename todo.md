@@ -20,3 +20,12 @@
 - [x] Retrieve and evaluate the strongest compatible component implementations.
 - [x] Integrate the approved component patterns into the portfolio.
 - [x] Validate the revised desktop and mobile experience.
+
+## Ground-Up Rebuild
+
+- [x] Define a new visual direction and replacement information architecture.
+- [x] Search the connected 21st.dev library for a broad component inventory.
+- [x] Retrieve compatible component sources within the available account allowance.
+- [x] Replace the existing portfolio implementation with the new experience.
+- [x] Validate desktop/mobile performance, accessibility, and production build.
+- [ ] Save and deliver the replacement portfolio checkpoint.
