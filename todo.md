@@ -67,3 +67,10 @@
 - [x] Add pointer and scroll-driven 3D parallax to the hero.
 - [x] Validate the enhanced desktop and mobile interaction experience.
 - [ ] Save and deliver the interaction-enhanced checkpoint.
+
+## High-Visibility Interaction Pass
+
+- [x] Define stronger, immediately visible hero, cursor, glass, and card-motion changes.
+- [x] Implement large-scale interaction transformations.
+- [x] Validate the amplified desktop and mobile experience.
+- [ ] Save and deliver the high-visibility interaction checkpoint.

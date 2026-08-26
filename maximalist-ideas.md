@@ -19,3 +19,7 @@ The interaction review again recommended replacing the colourful scrapbook visua
 ## Glass and Depth Addendum
 
 The supplied reference imagery is not used as website content. It informs original chrome-glass hover layers, restrained iridescent highlight motion, deep-space contrast, editorial cobalt flashes, and ASCII-style interaction mood. The overall Pinterest scrapbook direction remains the active user-selected style; quiet-mineral review recommendations conflict with that request and are therefore not adopted.
+
+## High-Visibility Interaction Decision
+
+The latest style review repeated the Quiet Precision recommendation. It is not adopted because the user requested clearly visible **Pinterest-style maximalism** and asked for a stronger rather than quieter interaction pass. The accepted rule is that stronger effects must make actions obvious: visible 3D hero depth, chrome sweeps, large glass button response, and direct project-open overlays.
