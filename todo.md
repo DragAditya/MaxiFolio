@@ -1,5 +1,11 @@
 # Portfolio Upgrade Checklist
 
+## Advanced Desktop Dock
+
+- [x] Redesign the desktop dock as an integrated advanced control bar.
+- [x] Add live section state and richer desktop dock interactions without changing mobile behavior.
+- [x] Validate and deliver the advanced desktop dock checkpoint.
+
 ## Scrapbook Portfolio Dock
 
 - [x] Inspect the referenced ReactBits dock behavior and map it to portfolio navigation.
