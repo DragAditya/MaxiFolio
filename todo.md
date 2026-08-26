@@ -1,5 +1,13 @@
 # Portfolio Upgrade Checklist
 
+## Desktop Visual-System Correction
+
+- [x] Audit the repeated desktop hierarchy, density, alignment, and composition failures across the provided screenshots.
+- [x] Define a unified desktop layout system that preserves the scrapbook identity without visual clutter.
+- [x] Rebuild the hero, projects, GitHub, skills, story, awards, contact, and desktop dock layouts.
+- [x] Validate desktop quality and preserve the established mobile experience.
+- [x] Deliver the desktop visual-system checkpoint.
+
 ## Advanced Desktop Dock
 
 - [x] Redesign the desktop dock as an integrated advanced control bar.

@@ -41,3 +41,16 @@ The premium scrapbook preloader passed TypeScript/build checks and desktop/mobil
 The scrapbook portfolio dock passed TypeScript/build checks and desktop/mobile visual validation. It adapts the requested ReactBits Dock behavior with a 60px panel, 40px resting controls, 70px pointer-proximity magnification, 200px interaction distance, and spring-driven movement. The local component supplies Home, Work, GitHub, Skills, Story, and Contact anchor navigation in the portfolio’s own outlined paper-glass language. On mobile, the dock retains compact 40px touch controls and stays fixed above the lower viewport without obscuring the primary hero actions. Reduced-motion users retain the stable navigation controls without magnification.
 
 The advanced desktop dock refinement passed TypeScript/build checks and desktop/mobile visual validation. The desktop control now remains hidden during the opening hero, avoiding the original overlap with the headline and illustration; after the visitor leaves the hero it appears as a compact dark control surface with chapter telemetry, live state, active-section detection, a scan line, colored active marker, and the existing 40px-to-70px proximity magnification. The mobile dock remains compact, visible, and unchanged in its touch-first behavior.
+
+## Desktop Visual-System Correction — 2026-08-26
+
+| Validation area | Result | Confirmed correction |
+| --- | --- | --- |
+| Build and type safety | Passed | `pnpm check` and `pnpm build` completed successfully. The existing Vite large-chunk advisory remains non-blocking. |
+| Desktop hierarchy | Passed | A shared editorial rail/evidence-board grid now governs the hero, Projects, GitHub, Skills, Story, Awards, and Contact instead of independent poster-like compositions. |
+| Evidence density | Passed | Projects now use a primary-left / stacked-right board; timelines and awards use stable shared baselines; the GitHub stage and skills board have stronger readable content weights. |
+| Desktop navigation | Passed | The dock no longer competes with the hero and appears as a compact, scroll-engaged control. |
+| Mobile preservation | Passed | The desktop system is isolated to `min-width: 981px`; a full mobile check confirms the established single-column flow, fixed compact dock, and responsive sections remain intact. |
+| Motion and accessibility | Passed | Primary project/repository interactions remain intact; secondary desktop ornament has been reduced. Focusable anchors and visible focus styles remain available, and reduced-motion rules still suppress non-essential movement. |
+
+The independent visual reviewer again recommended the historical Quiet Precision direction. That recommendation conflicts with the user’s explicit request to preserve a maximalist Pinterest/scrapbook identity, so the correction follows the user’s direction: it disciplines alignment, density, color roles, and evidence hierarchy without removing the site’s bright material language.
