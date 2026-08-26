@@ -1,17 +1,5 @@
 # Portfolio Upgrade Checklist
 
-## Restored Mobile Hero Polish
-
-- [x] Restore the earlier mobile hero composition preferred by the user.
-- [x] Apply measured spacing and motion polish without changing the composition.
-- [x] Validate and deliver the restored mobile hero checkpoint.
-
-## Mobile Hero Refinement
-
-- [x] Improve mobile headline, description, CTA, and illustration spacing.
-- [x] Refine hero framing and reduce mobile decorative competition for a cleaner opening scene.
-- [x] Validate and deliver the mobile hero refinement checkpoint.
-
 ## Premium Scrapbook Preloader
 
 - [x] Research component-catalogue preloader patterns and define a matching launch scene.
