@@ -1,4 +1,10 @@
 # Portfolio Upgrade Checklist
+## Project Image Performance Pass
+
+- [x] Audit project image payloads, dimensions, formats, and loading behavior.
+- [x] Generate compressed responsive project-image variants and update delivery markup.
+- [x] Validate and publish the image performance improvement.
+
 ## Four-Second Preloader and Anti-Jank Pass
 
 - [x] Audit preloader, archive carousel, and continuous decorative motion for rendering cost.

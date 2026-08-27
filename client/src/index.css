@@ -158,3 +158,6 @@
   .contact-control-room .contact-lead h2 { margin:.75rem 0 1rem; }
   .contact-control-room .contact-control-grid { position:relative; z-index:2; margin-top:2rem; padding-top:0; }
 }
+
+/* Responsive project image delivery: reserve exact artwork geometry before decode and avoid image-driven layout work while scrolling. */
+.hero-art-motion,.hero-art-motion picture,.project-image-wrap picture{display:block}.hero-art-motion{contain:paint}.project-image-wrap{contain:layout paint;overflow:hidden}.project-image-wrap img{display:block;width:100%;height:auto}
