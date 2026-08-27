@@ -1,4 +1,15 @@
 # Portfolio Upgrade Checklist
+## Four-Second Preloader and Anti-Jank Pass
+
+- [x] Audit preloader, archive carousel, and continuous decorative motion for rendering cost.
+- [x] Build a deliberate four-second preloader and optimize motion scheduling.
+- [x] Validate and deliver the smooth-motion checkpoint.
+
+## Reusable Developer Portfolio Skill
+
+- [x] Capture the proven portfolio build, audit, validation, and rollback workflow.
+- [x] Initialize and write a reusable skill package.
+- [x] Validate and deliver the skill package.
 
 ## Mobile Contact Dead-Space Fix
 
