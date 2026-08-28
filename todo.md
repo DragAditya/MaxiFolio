@@ -1,6 +1,12 @@
 # Portfolio Upgrade Checklist
 ## Project Image Performance Pass
 
+## Real Preloader and Offline Cache
+
+- [x] Audit the existing preloader timing and cacheable asset set.
+- [x] Replace the forced delay with real resource readiness and add offline asset caching.
+- [x] Validate the ready-state handoff and publish the smoothness update.
+
 - [x] Audit project image payloads, dimensions, formats, and loading behavior.
 - [x] Generate compressed responsive project-image variants and update delivery markup.
 - [x] Validate and publish the image performance improvement.
