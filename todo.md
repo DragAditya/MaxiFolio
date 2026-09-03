@@ -182,3 +182,7 @@
 - [x] Implement large-scale interaction transformations.
 - [x] Validate the amplified desktop and mobile experience.
 - [ ] Save and deliver the high-visibility interaction checkpoint.
+
+## Vercel Deployment Entrypoint Fix
+
+- [ ] Diagnose why Vercel is surfacing or executing `server/index.ts` instead of serving the built portfolio, then validate the corrected deployment.
